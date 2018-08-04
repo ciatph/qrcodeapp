@@ -11,10 +11,11 @@ The following settings and software versions have been used for this project.
 
 ## Installation
 
-1. Clone this repository into yourPC.
+1. Clone this repository into your PC.
 2. Open using Android Studio (preferably AS version 3.1.3).
 3. Wait for files to sync.
 4. In AS, press the **Sync Project with Gradle Files** button.
+5. Run and build on emulator or device.
 
 **Date Created:** 20180404<br>
 **Date Modified:** 20180404
