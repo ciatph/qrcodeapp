@@ -1,6 +1,8 @@
 # qrcodeapp
 An attendance list checker using QR code scanner for tagging names.
 
+Uses the latest **[ML Kit](https://firebase.google.com/docs/ml-kit/android/read-barcodes)** for Android.
+
 ## Dependencies
 
 The following settings and software versions have been used for this project.
@@ -18,4 +20,4 @@ The following settings and software versions have been used for this project.
 5. Run and build on emulator or device.
 
 **Date Created:** 20180404<br>
-**Date Modified:** 20180404
+**Date Modified:** 20180405
