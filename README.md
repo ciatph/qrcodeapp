@@ -17,7 +17,12 @@ The following settings and software versions have been used for this project.
 1. **Android Studio** version 3.1.3
 2. **Gradle Version** 4.4
 3. **Android Plugin Version** 3.1.0
-4. **SDK Tools**
+4. **Gradle dependencies:**
+   - com.google.firebase:firebase-ml-vision:16.0.0
+   - com.google.firebase:firebase-core:16.0.1
+   - com.google.firebase:firebase-database:16.0.1
+   - com.android.support:appcompat-v7:27.+
+5. **SDK Tools**
    - Android SDK Build-Tools version 28.0.1
    - Android SDK Platform-Tools version 28.0.0
    - Android SDK Tools version 26.1.1
