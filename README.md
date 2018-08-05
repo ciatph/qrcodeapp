@@ -32,6 +32,11 @@ The following settings and software versions have been used for this project.
 2. Open using Android Studio (preferably AS version 3.1.3).
 3. Wait for files to sync.
 4. In AS, press the **Sync Project with Gradle Files** button.
+5. Connect the app to your Google firebase account.
+   - In Android Studio, click on `Tools > Firebase`
+   - Select `Realtime Database > Save and retrieve data`
+   - Click Connect to Firebase - Login using your google account
+   - Create a Firebase project if it does not yet exist
 5. Run and build on an emulator or device.
 
 **Date Created:** 20180404<br>
