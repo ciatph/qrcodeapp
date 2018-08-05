@@ -30,6 +30,22 @@ public class MainActivity extends AppCompatActivity {
                 startCamera();
             }
         });
+
+        findViewById(R.id.btn_continue).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                startContinousScan();
+            }
+        });
+    }
+
+
+    /**
+     * Launch the continuous QR code scanning Activity
+     */
+    private void startContinousScan(){
+        Intent intent = new Intent(this, ContinueScanActivity.class);
+        startActivity(intent);
     }
 
     /**
