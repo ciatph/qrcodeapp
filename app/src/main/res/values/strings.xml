@@ -1,13 +1,3 @@
 <resources>
-    <string name="app_name">QRCodeApp</string>
-
-    <!-- Strings related to barcode scanner -->
-    <string name="ok">OK</string>
-    <string name="permission_camera_rationale">Access to the camera is needed for detection</string>
-    <string name="no_camera_permission">This application cannot run because it does not have the camera permission.  The application will now exit.</string>
-    <string name="low_storage_error">Face detector dependencies cannot be downloaded due to low device storage</string>
-
-    <!-- camera capture for picture -->
-    <string name="camera_capture_label"><b>Take a picture</b></string>
-    <string name="camera_image_label"><b>Captured Image</b></string>
+    <string name="app_name">qrcodeapp</string>
 </resources>

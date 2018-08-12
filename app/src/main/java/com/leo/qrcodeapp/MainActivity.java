@@ -1,76 +1,68 @@
 package com.leo.qrcodeapp;
 
-import android.content.Intent;
+import android.Manifest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.View;
+import android.view.SurfaceView;
 import android.widget.TextView;
-import android.widget.Toast;
 
-import com.google.android.gms.common.api.CommonStatusCodes;
-import com.google.android.gms.vision.barcode.Barcode;
-import com.leo.qrcodeapp.barcode.BarcodeCaptureActivity;
+import github.nisrulz.qreader.QRDataListener;
+import github.nisrulz.qreader.QREader;
 
 public class MainActivity extends AppCompatActivity {
-    private TextView textResult;
+
+    // QREader
+    private SurfaceView surfaceView;
+    private QREader qrEader;
+    private TextView textView;
+
+    // Camera permissions
+    boolean hasCamPermission = false;
+    private static final String cameraPermission = Manifest.permission.CAMERA;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        hasCamPermission = RuntimePermissionUtil.checkPermissonGranted(this, cameraPermission);
 
-        // Text from scanned QR code
-        textResult = findViewById(R.id.txt_result);
+        // Setup SurfaceView
+        surfaceView = findViewById(R.id.camera_view);
+        textView = findViewById(R.id.text_info);
 
-        // Add click event to the camera button
-        findViewById(R.id.btn_camera).setOnClickListener(new View.OnClickListener() {
+        // Initialize QREader
+        qrEader = new QREader.Builder(this, surfaceView, new QRDataListener() {
             @Override
-            public void onClick(View v) {
-                startCamera();
+            public void onDetected(final String data) {
+                textView.post(new Runnable() {
+                    @Override
+                    public void run() {
+                        textView.setText(data);
+                    }
+                });
             }
-        });
-
-        findViewById(R.id.btn_continue).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startContinousScan();
-            }
-        });
-    }
-
-
-    /**
-     * Launch the continuous QR code scanning Activity
-     */
-    private void startContinousScan(){
-        Intent intent = new Intent(this, ContinueScanActivity.class);
-        startActivity(intent);
-    }
-
-    /**
-     * Start the native device camera
-     */
-    private void startCamera(){
-        Intent intent = new Intent(this, BarcodeCaptureActivity.class);
-        startActivityForResult(intent, StatusCodes.INSTANCE.BARCODE_READER_REQUEST_CODE);
+        }).facing(QREader.BACK_CAM)
+                .enableAutofocus(true)
+                .height(surfaceView.getHeight())
+                .width(surfaceView.getWidth())
+                .build();
     }
 
 
     @Override
-    protected void onActivityResult(int requestCode, int resultCode, Intent data){
-        super.onActivityResult(requestCode, resultCode, data);
-        String message = "";
+    protected void onResume(){
+        super.onResume();
 
-        if(requestCode == StatusCodes.INSTANCE.BARCODE_READER_REQUEST_CODE && resultCode == CommonStatusCodes.SUCCESS){
-            if(data != null){
-                Barcode barcode = data.getParcelableExtra(BarcodeCaptureActivity.BarcodeObject);
-                Log.d("-scan result", barcode.displayValue + "!");
-                message = barcode.displayValue;
-                textResult.setText(barcode.displayValue);
-            }
+        // Initialize and start SurfaceView
+        qrEader.initAndStart(surfaceView);
+    }
 
-            Toast.makeText(this, message, Toast.LENGTH_SHORT).show();
-        }
+
+    @Override
+    protected void onPause(){
+        super.onPause();
+
+        // Cleanup
+        qrEader.releaseAndCleanup();
     }
 }
