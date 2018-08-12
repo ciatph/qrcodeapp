@@ -1,5 +1,7 @@
 # qrcodeapp
-An attendance list checker using QR code scanner for tagging names.
+An attendance list checker using QR code scanner for tagging names using Google Play Services and Google's Mobile Vision Library API's.
+
+Done with references from varvet's [BarcodeReaderSample](https://github.com/varvet/BarcodeReaderSample).
 
 ## Dependencies
 
@@ -17,5 +19,5 @@ The following settings and software versions have been used for this project.
 4. In AS, press the **Sync Project with Gradle Files** button.
 5. Run and build on emulator or device.
 
-**Date Created:** 20180404<br>
-**Date Modified:** 20180404
+**Date Created:** 20180804<br>
+**Date Modified:** 20180812
