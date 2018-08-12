@@ -32,6 +32,7 @@ public class MainActivity extends AppCompatActivity {
         });
     }
 
+
     /**
      * Start the native device camera
      */
