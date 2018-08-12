@@ -1,13 +1,13 @@
 package com.leo.qrcodeapp;
 
+import android.Manifest;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.SurfaceView;
 import android.widget.TextView;
 
-import com.leo.qrcodeapp.qreader.QRDataListener;
-import com.leo.qrcodeapp.qreader.QREader;
+import com.leo.qrcodeapp.qreader.*;
 
 public class ContinueScanActivity extends AppCompatActivity {
 
@@ -15,10 +15,16 @@ public class ContinueScanActivity extends AppCompatActivity {
     private QREader qrEader;
     private TextView textView;
 
+    private static final String cameraPermission = Manifest.permission.CAMERA;
+    boolean hasCamPermission = false;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_continue_scan);
+
+        // Add camera access permissions
+        hasCamPermission = RuntimePermissionUtil.checkPermissonGranted(this, cameraPermission);
 
         surfaceView = findViewById(R.id.camera_view);
         textView = findViewById(R.id.txt_read);
