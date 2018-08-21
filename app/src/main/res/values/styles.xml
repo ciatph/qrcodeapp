@@ -8,4 +8,32 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
+    <style name="label_normal_padding">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/label_uniform</item>
+        <item name="android:paddingTop">@dimen/padding_edit_box</item>
+    </style>
+
+    <style name="textarea_add">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/label_large</item>
+        <item name="android:background">@drawable/edittext_bg_fine</item>
+        <item name="android:inputType">textMultiLine</item>
+        <item name="android:lines">4</item>
+        <item name="android:minLines">4</item>
+        <item name="android:ems">10</item>
+        <item name="android:gravity">top</item>
+        <item name="android:scrollbars">vertical</item>
+        <item name="android:textColor">#757575</item>
+        <item name="android:paddingLeft">@dimen/padding_edit_box</item>
+        <item name="android:fadeScrollbars">false</item>
+    </style>
+
+    <style name="label_small_normal">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:textSize">@dimen/label_large</item>
+    </style>
 </resources>

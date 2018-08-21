@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <!-- main UI INPUT text, font sizes -->
+    <dimen name="text_size_large">24sp</dimen>
+    <dimen name="text_size_medium">18sp</dimen>
+    <dimen name="text_size_normal">16sp</dimen>
+
+    <!-- main LABELS text, font sizes -->
+    <dimen name="label_small">12sp</dimen>
+    <dimen name="label_uniform">14sp</dimen>
+    <dimen name="label_medium">16sp</dimen>
+    <dimen name="label_large">18sp</dimen>
+    <dimen name="label_small_double">24sp</dimen>
+
+    <!-- paddings -->
+    <dimen name="padding_edit_box">5sp</dimen>
+    <dimen name="padding_text_views">8dp</dimen>
+    <dimen name="padding_edit_box_dp">5dp</dimen>
+    <dimen name="padding_progressbar">128dp</dimen>
+    <dimen name="padding_progressbar_side">64dp</dimen>
+    <dimen name="padding_default">16dp</dimen>
+    <dimen name="padding_medium">12dp</dimen>
+    <dimen name="padding_default_half">8dp</dimen>
+    <dimen name="padding_large">24dp</dimen>
+</resources>
