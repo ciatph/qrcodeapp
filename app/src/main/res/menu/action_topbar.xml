@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item android:id="@+id/action_app_search"
+        android:title="@string/menu_search"
+        android:icon="@drawable/baseline_search_24"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_app_upload"
+        android:title="@string/menu_add"
+        android:icon="@drawable/baseline_cloud_upload_black_24"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_app_filter"
+        android:title="@string/menu_filter"
+        android:icon="@drawable/ic_filter_list_black_24dp"
+        app:showAsAction="always">
+
+    </item>
+
+    <item android:id="@+id/action_app_add"
+        android:title="@string/menu_add"
+        android:icon="@drawable/ic_add_black_24dp"
+        app:showAsAction="always" />
+
+
+    <item android:id="@+id/action_app_delete"
+        android:title="@string/menu_delete"
+        android:icon="@drawable/ic_delete_forever_black_24dp"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_app_save"
+        android:title="@string/menu_save"
+        android:icon="@drawable/ic_check_black_24dp"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_app_edit"
+        android:title="@string/menu_edit"
+        android:icon="@drawable/ic_border_color_black_24dp"
+        app:showAsAction="always" />
+
+    <item android:id="@+id/action_app_cancel"
+        android:title="@string/menu_cancel"
+        android:icon="@drawable/ic_clear_black_24dp"
+        app:showAsAction="always" />
+
+</menu>

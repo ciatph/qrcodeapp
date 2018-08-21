@@ -1,3 +1,68 @@
 <resources>
     <string name="app_name">qrcodeapp</string>
+    <string name="app_database_name">QrcodeApp.db</string>
+
+    <!-- topbar menu -->
+    <string name="menu_add">Add Survey</string>
+    <string name="menu_delete">Delete</string>
+    <string name="menu_save">Save</string>
+    <string name="menu_edit">Edit</string>
+    <string name="menu_cancel">Cancel</string>
+    <string name="menu_filter">Filter List</string>
+    <string name="menu_search">Search</string>
+
+    <!-- topbar titles -->
+    <string name="top_title_login">Login</string>
+    <string name="top_title_registration">Registration</string>
+    <string name="top_title_add">Add</string>
+    <string name="top_title_view">View</string>
+    <string name="top_title_edit">Edit</string>
+    <string name="top_title_delete">Delete</string>
+    <string name="top_title_list">List</string>
+    <string name="top_title_search">Search</string>
+    <string name="top_title_about">About</string>
+
+    <!-- label hints -->
+    <string name="hint_email">Email</string>
+    <string name="hint_password">Password</string>
+    <string name="hint_username">First Name</string>
+    <string name="hint_lastname">Last Name</string>
+    <string name="hint_confirm">Confirm Password</string>
+    <string name="hint_gps">GPS Location</string>
+
+    <!-- Error messages -->
+    <string name="err_msg_network">Please check your internet connection.</string>
+    <string name="err_msg_check_input">Please check your input.</string>
+    <string name="err_msg_password_mismatch">Passwords do not match!</string>
+    <string name="err_msg_fb_console">This operation is not allowed. Please contact the admins for this app\'s authentication settings.</string>
+    <string name="err_msg_fb_userexists">Cannot create account. This email address is already in use or pending for approval.</string>
+    <string name="err_msg_fb_user_validation">This account is pending for approval.</string>
+    <string name="err_msg_fb_login">Login error!</string>
+    <string name="err_msg_fb_login_pass">Your password is incorrect.</string>
+    <string name="err_msg_fb_login_username">There is no such username. This user may have been deleted.</string>
+    <string name="err_msg_delete_data">There was an error deleting this data.</string>
+
+    <!-- Notification messages -->
+    <string name="msg_signing_up">Signing up...</string>
+    <string name="msg_registration_success">Registration successful!</string>
+    <string name="msg_login_success">Login success!</string>
+    <string name="msg_please_wait">Please wait while loading...</string>
+    <string name="msg_save_success">Success on saving data!</string>
+    <string name="msg_saving">"Please wait while data is saving..."</string>
+    <string name="msg_save_failed">Failed saving data.</string>
+    <string name="msg_save_success_local">Success saving data on local database. Please sync online later when network becomes available.</string>
+    <string name="msg_save_failed_local">Error saving data on local database. Data was not synced online.</string>
+    <string name="msg_no_user_loggedin">Cannot proceed. No user is logged in.</string>
+    <string name="msg_login_success_offline">Login success! Warning, you are not connected to the internet. New data and updates will not be saved but not synced online.</string>
+    <string name="msg_syncing">Please wait while data is synced online.</string>
+    <string name="msg_page_loads">Please wait while page loads.</string>
+    <string name="msg_relogin_offline">You are currently logged in offline. Please re-login with network connection to proceed.</string>
+    <string name="msg_relogin_user_accnt">There was an error processing your account. Please re-login.</string>
+    <string name="msg_app_locked">Please wait while the app finishes its process.</string>
+    <string name="msg_data_deleted">Farmer record has been deleted.</string>
+    <string name="msg_confirm">Are you sure you want to proceed?</string>
+    <string name="msg_confirm_sync">Are you sure you want to sync data?</string>
+    <string name="msg_upload_success">Success on uploading data!</string>
+    <string name="msg_warn_complete_fields">Please complete the preceding input field first.</string>
+    <string name="msg_exit_page">Are you sure you want to exit?</string>
 </resources>

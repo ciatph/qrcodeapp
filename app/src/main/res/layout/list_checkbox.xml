@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<CheckBox xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/item_checkbox"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginBottom="@dimen/padding_edit_box"
+    android:layout_marginLeft="@dimen/padding_default"
+    android:layout_marginRight="@dimen/padding_default"
+    android:layout_marginTop="@dimen/padding_edit_box"
+    android:clickable="false"
+    android:focusable="false"
+    android:focusableInTouchMode="false"
+    android:paddingBottom="@dimen/padding_default_half"
+    android:paddingTop="@dimen/padding_default_half"
+    android:text="CheckBox"
+    android:textColor="@color/colorPrimaryText"
+    android:textSize="@dimen/label_medium" />
