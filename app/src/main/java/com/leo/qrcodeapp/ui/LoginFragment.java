@@ -126,7 +126,7 @@ public class LoginFragment extends Fragment {
         int msgCode = MsgNotification.INSTANCE.MSG_CHECK_INPUT;
 
         if(((MainActivity) getContext()).userExists(email, password, true)){
-            Intent intent = new Intent(new Intent(getActivity(), EventListActivity.class));
+            Intent intent = new Intent(new Intent(getActivity(), MainQRActivity.class));
             startActivity(intent);
         }
     }

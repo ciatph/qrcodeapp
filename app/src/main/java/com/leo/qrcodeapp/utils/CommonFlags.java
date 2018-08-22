@@ -37,8 +37,6 @@ public enum CommonFlags {
     public String YEAR_2015 = "2015";
     public String CURRENT_YEAR = YEAR_2014;
 
-    public int CURRENT_FARMER_INDEX = 0;
-
     // Current farmer _did that is being synced
     public String CURRENT_SYNC_ID = "";
     public String PREVIOUS_SYNC_ID = "";
@@ -100,7 +98,7 @@ public enum CommonFlags {
     public final int SCREEN_REGISTER = 12;
 
     // entered farmer information summary list screen
-    public final int SCREEN_LIST_FARMER = 13;
+    public final int SCREEN_LIST_EVENTS = 13;
 
     // entered farmer information summary list screen
     public final int SCREEN_LIST_PLOT = 14;
@@ -136,10 +134,9 @@ public enum CommonFlags {
     // year selection
     public final int ACTION_SELECT_YEAR = 23;
 
-    public final String LIST_HEADER = "header";             // fname + lname
-    public final String LIST_SUBTOPIC_01 = "subtopic_01";   // isSynced
-    public final String LIST_SUBTOPIC_02 = "subtopic_02";   // mobile #
-    public final String LIST_SUBTOPIC_03 = "subtopic_03";   // date created
+    public final String LIST_HEADER = "header";             // event name
+    public final String LIST_SUBTOPIC_01 = "subtopic_01";   // event date
+    public final String LIST_SUBTOPIC_02 = "subtopic_02";   // user/encoder
     public final String LIST_ID = "_did";
     public final String LIST_ISSYNCED = "_isSynced";
     public final String LIST_YEAR = "_year";
@@ -196,7 +193,7 @@ public enum CommonFlags {
      * Current global status values
      */
     // the current active screen
-    public int ACTIVE_SCREEN = SCREEN_LIST_FARMER;
+    public int ACTIVE_SCREEN = SCREEN_LIST_EVENTS;
 
     // the current active user's data processing action
     public int PROCESS_MODE = ACTION_LIST;
@@ -245,7 +242,7 @@ public enum CommonFlags {
      */
     public void reset(){
         // screen status
-        ACTIVE_SCREEN = SCREEN_LIST_FARMER;
+        ACTIVE_SCREEN = SCREEN_LIST_EVENTS;
 
         // data process status
         PROCESS_MODE = ACTION_LIST;
