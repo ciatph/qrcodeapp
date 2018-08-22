@@ -196,7 +196,7 @@ public enum AppUtilities {
      * @return  boolean true|false flag if network connection is present
      */
     public boolean hasNetworkConnection(){
-        ConnectivityManager cm = (ConnectivityManager) getContext()
+        ConnectivityManager cm = (ConnectivityManager) ApplicationContextProvider.getContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();
@@ -214,7 +214,7 @@ public enum AppUtilities {
     public int getNetworkType(){
         int networkType = -1;
 
-        ConnectivityManager cm = (ConnectivityManager) getContext()
+        ConnectivityManager cm = (ConnectivityManager) ApplicationContextProvider.getContext()
                 .getSystemService(Context.CONNECTIVITY_SERVICE);
 
         NetworkInfo activeNetwork = cm.getActiveNetworkInfo();

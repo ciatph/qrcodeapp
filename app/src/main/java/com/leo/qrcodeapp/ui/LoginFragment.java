@@ -16,9 +16,15 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 
+import com.leo.qrcodeapp.MainActivity;
+import com.leo.qrcodeapp.R;
 import com.leo.qrcodeapp.db.DatabaseContract;
 import com.leo.qrcodeapp.db.DatabaseHelper;
+import com.leo.qrcodeapp.models.Account;
+import com.leo.qrcodeapp.utils.AppUtilities;
+import com.leo.qrcodeapp.utils.CommonFlags;
 import com.leo.qrcodeapp.utils.MsgNotification;
+import com.leo.qrcodeapp.utils.TestScript;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -43,11 +49,8 @@ public class LoginFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // FirebaseDatabase.getInstance().setPersistenceEnabled(true);
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_login, container, false);
-
-        initFirebase();
         intializeElements(view);
 
         // check if import data from sharedPreferences exists
@@ -62,18 +65,7 @@ public class LoginFragment extends Fragment {
     public void onStart(){
         super.onStart();
         dbConnector = DatabaseHelper.getsInstance(getActivity());
-    }
-
-
-    /**
-     * Disable all user input and display the loading progress spinner
-     */
-    public void autoLoginInit(){
-        txtEmail.setEnabled(false);
-        txtPass.setEnabled(false);
-        btnLogin.setEnabled(false);
-        mProgress.setMessage(MsgNotification.INSTANCE.getMessage(MsgNotification.INSTANCE.MSG_WAIT_LOADING));
-        mProgress.show();
+        initConstants();
     }
 
 
@@ -83,23 +75,12 @@ public class LoginFragment extends Fragment {
      */
     public void initConstants(){
         // default test account
-        if(!dbConnector.recordExists(DatabaseContract.AccountTable.TABLE_NAME,
-                DatabaseContract.AccountTable.COL_FB_ID, "qwertyuiop"))
+        if(!dbConnector.recordExists(Account.tablename,
+                Account.username, "guest"))
             (new TestScript()).createUser(dbConnector);
 
         // Add test user to device sharedPrefs. This user cannot save online data
         logUserDevice("ciat@gmail.com", "ciat", "ciatph");
-    }
-
-    /**
-     * Initialize firebase database and authentication
-     */
-    private void initFirebase(){
-        Log.d(TAG, "--initialized firebase!");
-        // TODO: 10/13/2017 get specific user records to avoid massive data downloads
-        database = FirebaseDatabase.getInstance();
-        mReference = database.getReference(DatabaseFirebaseHelper.INSTANCE.FB_USER_ACCOUNT);
-        mAuth = FirebaseAuth.getInstance();
     }
 
 
@@ -144,123 +125,9 @@ public class LoginFragment extends Fragment {
         final String password = txtPass.getText().toString().trim();
         int msgCode = MsgNotification.INSTANCE.MSG_CHECK_INPUT;
 
-        // check if a user is logged in from firebase even if offline: proceed to login
-        // no need to verify email-password auth online
-        // user data is automatically assumed to be:
-        //      - admin-approved (acct_status=1)
-        //      - and record exists in local sqlite3 database
-        if(mAuth.getCurrentUser() != null){
-        //if(CommonFlags.INSTANCE.USER_SIGNED_IN){
-            Log.d(TAG, "-------A user is TAGged-in! Proceed to main page");
-
-            final String user_id = mAuth.getCurrentUser().getUid();
-            isValidUser(mAuth.getCurrentUser().getEmail());
-            Log.d(TAG, "-------user is " + user_id);
-
-            autoLoginInit();
-            proceedMainPage(1000);
-        }
-        else{
-            // Detect network connection. Proceed to login if user is valid (has firebase auth & admin-validated)
-            if (!TextUtils.isEmpty(email) && !TextUtils.isEmpty(password)) {
-                if(!AppUtilities.INSTANCE.hasNetworkConnection()){
-                    if(isValidUser(email, password)){
-                        MsgNotification.INSTANCE.displayMessage(
-                                MsgNotification.INSTANCE.getMessage(MsgNotification.INSTANCE.MSG_LOGIN_SUCCESS_OFFLINE));
-
-                        // proceed to login
-                        Log.d(TAG, "User exists in sharedPrefs");
-                        autoLoginInit();
-                        proceedMainPage(1000);
-                    }
-                    else{
-                        Log.d(TAG, "User do not exist in sharedPrefs");
-                        MsgNotification.INSTANCE.displayMessage(
-                                MsgNotification.INSTANCE.getMessage(MsgNotification.INSTANCE.MSG_CHECK_INPUT));
-                    }
-                }
-                else{
-                    // initialize online login, add user to device sharedPrefs for first time
-                    mProgress.setMessage(MsgNotification.INSTANCE.getMessage(MsgNotification.INSTANCE.MSG_WAIT_LOADING));
-                    mProgress.show();
-
-                    // initiate sign-in using firebase Email-Password authentication
-                    mAuth.signInWithEmailAndPassword(email, password).addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                final String user_id = mAuth.getCurrentUser().getUid();
-
-                                //// TODO: 10/18/2017 Add Intent background listeners here to minimize codes
-                                mReference.child(user_id).addListenerForSingleValueEvent(new ValueEventListener() {
-                                    @Override
-                                    public void onDataChange(DataSnapshot dataSnapshot) {
-                                        if (DatabaseFirebaseHelper.INSTANCE.getValue(DatabaseContract.AccountTable.COL_ACCT_STATUS, dataSnapshot).equals("1")) {
-
-                                            // check if logged-in user exists in local database. insert if not
-                                            if (!dbConnector.recordExists(DatabaseContract.AccountTable.TABLE_NAME,
-                                                    DatabaseContract.AccountTable.COL_FB_ID, user_id)) {
-
-                                                Log.d(TAG, "INSERT Account to local sqlite!");
-                                                Account account = new Account();
-                                                account.mappedContents.put(DatabaseContract.AccountTable.COL_FB_ID, user_id);
-                                                account.mappedContents.put(DatabaseContract.AccountTable.COL_FNAME, mAuth.getCurrentUser().getDisplayName());
-                                                account.mappedContents.put(DatabaseContract.AccountTable.COL_EMAIL, mAuth.getCurrentUser().getEmail());
-
-                                                dbConnector.insertDB(DatabaseContract.AccountTable.TABLE_NAME,
-                                                        account.getColumnFields(), account.getValuesFields());
-
-                                            } else {
-                                                Log.d(TAG, "User EXISTS in local sqlite! " + email);
-                                            }
-
-                                            // add user to device  sharedPrefs
-                                            logUserDevice(email, password, user_id);
-
-                                            mProgress.dismiss();
-                                            MsgNotification.INSTANCE.displayMessage(
-                                                    MsgNotification.INSTANCE.getMessage(MsgNotification.INSTANCE.MSG_LOGIN_SUCCESS));
-
-
-                                            // revert to main page after successful login
-                                            txtPass.setEnabled(false);
-                                            txtEmail.setEnabled(false);
-                                            btnLogin.setEnabled(false);
-                                            proceedMainPage(0);
-                                        }
-                                        else {
-                                            // log-out default signed-in user if account is not yet admin-authenticated
-                                            // // TODO: 10/13/2017 research on using Custom Authentication for firebase
-                                            mAuth.signOut();
-                                            mProgress.dismiss();
-
-                                            Log.d(TAG, "User automatically signed out!");
-                                            MsgNotification.INSTANCE.displayMessage(
-                                                    MsgNotification.INSTANCE.getMessage(MsgNotification.INSTANCE.MSG_REG_PENDING));
-                                        }
-                                    }
-
-                                    @Override
-                                    public void onCancelled(DatabaseError databaseError) {
-
-                                    }
-                                });
-                            }
-                            else {
-                                // display login notification message
-                                Log.d("---", "error: " + task.getException().toString());
-                                mProgress.dismiss();
-                                MsgNotification.INSTANCE.displayMessage(
-                                        MsgNotification.INSTANCE.getMessage(task.getException().toString()));
-                            }
-                        }
-                    });
-                }
-            }
-            else{
-                MsgNotification.INSTANCE.displayMessage(
-                        MsgNotification.INSTANCE.getMessage(msgCode));
-            }
+        if(((MainActivity) getContext()).userExists(email, password, true)){
+            Intent intent = new Intent(new Intent(getActivity(), EventListActivity.class));
+            startActivity(intent);
         }
     }
 
@@ -278,12 +145,12 @@ public class LoginFragment extends Fragment {
                             try {
                                 mProgress.dismiss();
                             } catch (Exception e) { }
-                            startActivity(new Intent(getActivity(), AppDataCollectMain.class));
+                            //startActivity(new Intent(getActivity(), AppDataCollectMain.class));
                         }
                     }, timeoutMilli);
         }
         else{
-            startActivity(new Intent(getActivity(), AppDataCollectMain.class));
+            //startActivity(new Intent(getActivity(), AppDataCollectMain.class));
         }
     }
 

@@ -1,21 +1,44 @@
 package com.leo.qrcodeapp.models;
 
-public class Account {
-    // table name
-    public static final String TABLE_NAME = "account";
+import com.leo.qrcodeapp.db.DatabaseHelper;
+import com.leo.qrcodeapp.db.TableObjectsHelper;
 
-    // encoder's name
-    public static final String NAME = "name";
+public class Account extends TableObjectsHelper{
+    // table name
+    public static final String tablename = "account";
+
+    // encoder's first name
+    public static final String fname = "fname";
+
+    // encoder's middle name
+    public static final String mname = "mname";
+
+    // encoder's last name
+    public static final String lname = "lname";
+
+    // encoder's user name
+    public static final String username = "username";
+
+    // encoder's email address
+    public static final String email = "email";
 
     // encoder's password
-    public static final String PASS = "password";
+    public static final String password = "password";
 
     // account type:  1=user, 2=administrator, 3=super administrator
-    public static final String COL_ACCT_TYPE = "acct_type";
+    public static final String acct_type = "acct_type";
 
     // date account was created
-    public static final String DCREATE = "date_created";
+    public static final String date_created = "date_created";
 
     // date account details were modified
-    public static final String DMODIFIED = "date_modified";
+    public static final String date_modified = "date_modified";
+
+    public Account(){
+        initMapContents(
+                DatabaseHelper.getClassFieldNames(Account.class)
+        );
+    }
 }
+
+

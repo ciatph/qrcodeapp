@@ -83,6 +83,7 @@
 
     <Button
         android:id="@+id/btn_login"
+        style="@style/buttons_main"
         android:layout_width="0dp"
         android:layout_height="56dp"
         android:layout_marginBottom="@dimen/padding_default"
@@ -90,16 +91,13 @@
         android:layout_marginRight="@dimen/padding_default"
         android:layout_marginTop="@dimen/padding_default_half"
         android:background="@drawable/buttons"
-        style="@style/buttons_main"
         android:text="@string/btn_login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/txt_password"
-        app:layout_constraintVertical_bias="0.0"
-        android:layout_marginStart="@dimen/padding_default"
-        android:layout_marginEnd="@dimen/padding_default" />
+        app:layout_constraintVertical_bias="0.0" />
 
     <TextView
         android:id="@+id/label_signup"

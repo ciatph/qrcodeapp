@@ -31,7 +31,7 @@
     <string name="hint_gps">GPS Location</string>
 
     <!-- label text -->
-    <string name="app_name_title">Cassava Data Collector</string>
+    <string name="app_name_title">QR Code Attendance</string>
     <string name="signup">Not yet registered? Sign up</string>
     <string name="title_register">Create New Account</string>
     <string name="back_login">Back to Login</string>

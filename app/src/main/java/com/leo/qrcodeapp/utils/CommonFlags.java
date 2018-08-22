@@ -1,6 +1,7 @@
 package com.leo.qrcodeapp.utils;
 
 import com.leo.qrcodeapp.R;
+import com.leo.qrcodeapp.models.Account;
 
 
 /**
@@ -15,6 +16,9 @@ public enum CommonFlags {
     public boolean PAGE_UI_LOADED = false;
     public String USERID = null;
     public int MAX_PLOT_COUNT = 3;
+
+    public Account CURRENT_USER;
+    public boolean GUEST_USER = true;
 
     // Timeout delay when saving new plots data
     public int TIMEOUT_SAVE_DATA = 3000;

@@ -10,31 +10,34 @@ import java.util.HashMap;
  */
 
 public class TableObjectsHelper {
-    public String id;
+    private String id;
     // table columns' content-value mapping
     // used by extending classes
-    public HashMap<String, String> mappedContents = new HashMap<String, String>();
+    private HashMap<String, String> mappedContents = new HashMap<String, String>();
+
+    // used to map field names with their names
+    private HashMap<String, String> key = new HashMap<>();
 
     // actual values of foerign key maps
-    public HashMap<String, String> mappedForeign = new HashMap<>();
+    private HashMap<String, String> mappedForeign = new HashMap<>();
 
     // foreign independent tables associated with entry
     // column name, value
-    public HashMap<String, String> mappedTables = new HashMap<>();
+    private HashMap<String, String> mappedTables = new HashMap<>();
 
     // backup for values to compare
-    public HashMap<String, String> mappedBackup = new HashMap<>();
+    private HashMap<String, String> mappedBackup = new HashMap<>();
 
     // ordering of column fields, as they were initialized in initMapContents
-    public HashMap<Integer, String> mappingOrder = new HashMap<>();
+    private HashMap<Integer, String> mappingOrder = new HashMap<>();
 
     // table name
-    public String tableName = "";
+    private String tableName = "";
 
     // fields request type
-    final int FIELD_CONTENTS = 0;   // all column fields, without the _ID
-    final int FIELD_FOREIGN = 1;    // all foreign key fields
-    final int FIELD_TABLES = 2;     // all "foreign" values [table_name]
+    private final int FIELD_CONTENTS = 0;   // all column fields, without the _ID
+    private final int FIELD_FOREIGN = 1;    // all foreign key fields
+    private final int FIELD_TABLES = 2;     // all "foreign" values [table_name]
 
     public TableObjectsHelper(){}
 
@@ -43,6 +46,7 @@ public class TableObjectsHelper {
         for(int i=0; i<fields.length; i++){
             mappedContents.put(fields[i], "");
             mappingOrder.put(i, fields[i]);
+            key.put(fields[i], fields[i]);
         }
     }
 
@@ -59,7 +63,7 @@ public class TableObjectsHelper {
         }
     }
 
-    public String integerToString(int num){
+    private String integerToString(int num){
         StringBuilder sb = new StringBuilder();
         sb.append(num);
         return sb.toString();
@@ -84,6 +88,10 @@ public class TableObjectsHelper {
 
     public void setTableName(String tableName){
         this.tableName = tableName;
+    }
+
+    public String getKey(String searchKey){
+        return key.get(searchKey);
     }
 
     public String get(String key){

@@ -13,8 +13,14 @@ public class Attendee {
     // attend_id, guest id of attendee (QR CODE ID)
     public static final String ATT_ID = "att_id";
 
-    // attend_id, guest id of attendee
-    public static final String ATT_NAME = "att_name";
+    // attendee's first name
+    public static final String COL_MNAME = "fname";
+
+    // attendee's middle name
+    public static final String COL_FNAME = "mname";
+
+    // attendee's LAST name
+    public static final String COL_LNAME = "lname";
 
     // date attendee was encoded
     public static final String DCREATE = "date_created";

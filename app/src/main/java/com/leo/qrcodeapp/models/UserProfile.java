@@ -10,13 +10,13 @@ public class UserProfile {
     // event id to which attendee was encoded
     public static final String EVENT_ID = "event_id";
 
-    public static final String LAST_NAME = "lname";
+    public static final String COL_LNAME = "lname";
 
-    public static final String FIRST_NAME = "fname";
+    public static final String COL_FNAME = "fname";
 
-    public static final String MID_NAME = "mname";
+    public static final String COL_MNAME = "mname";
 
-    public static final String DISTRICT = "district";
+    public static final String COL_DISTRICT = "district";
 
-    public static final String HOME = "homestead";
+    public static final String COL_HOME = "homestead";
 }

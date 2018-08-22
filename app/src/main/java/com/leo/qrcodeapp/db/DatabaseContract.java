@@ -19,6 +19,6 @@ public class DatabaseContract {
 
 
     // ---------------- SQL CREATE TABLE query constants for FARMER METADATA TABLES ----------------
-    public static final String SQL_CREATE_ACCOUNT = DatabaseHelper.initLocalSchemaIndexed(Account.TABLE_NAME, Account.class);
+    public static final String SQL_CREATE_ACCOUNT = DatabaseHelper.initLocalSchemaIndexed(Account.tablename, Account.class);
 
 }
