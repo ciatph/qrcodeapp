@@ -30,6 +30,21 @@
     <string name="hint_confirm">Confirm Password</string>
     <string name="hint_gps">GPS Location</string>
 
+    <!-- label text -->
+    <string name="app_name_title">Cassava Data Collector</string>
+    <string name="signup">Not yet registered? Sign up</string>
+    <string name="title_register">Create New Account</string>
+    <string name="back_login">Back to Login</string>
+    <string name="title_plot_no">Plot Number: *</string>
+
+    <!-- buttons -->
+    <string name="btn_login">Login</string>
+    <string name="btn_register">Register</string>
+    <string name="btn_gps">GPS Location</string>
+    <string name="btn_okay">Ok</string>
+    <string name="btn_cancel">Cancel</string>
+    <string name="btn_upload">Upload Database</string>
+
     <!-- Error messages -->
     <string name="err_msg_network">Please check your internet connection.</string>
     <string name="err_msg_check_input">Please check your input.</string>

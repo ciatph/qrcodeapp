@@ -36,4 +36,37 @@
         <item name="android:layout_height">wrap_content</item>
         <item name="android:textSize">@dimen/label_large</item>
     </style>
+
+    <style name="title_main_white">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorTextIcons</item>
+        <item name="android:textSize">@dimen/text_size_large</item>
+    </style>
+
+    <style name="buttons_main">
+        <item name="android:textSize">@dimen/text_size_medium</item>
+        <item name="android:background">@drawable/buttons</item>
+    </style>
+
+    <style name="ButtonsMeta" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/colorAccent</item>
+        <item name="colorButtonNormal">@color/colorPrimaryDark</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="ButtonsFlat" parent="Theme.AppCompat.Light">
+        <item name="colorControlHighlight">@color/colorPrimaryDark</item>
+        <item name="colorButtonNormal">@color/colorAccent</item>
+        <item name="colorControlActivated">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="title_sub_white">
+        <item name="android:layout_width">wrap_content</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:gravity">center</item>
+        <item name="android:textColor">@color/colorTextIcons</item>
+        <item name="android:textSize">@dimen/text_size_medium</item>
+    </style>
 </resources>
