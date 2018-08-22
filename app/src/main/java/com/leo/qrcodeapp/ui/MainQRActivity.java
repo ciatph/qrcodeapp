@@ -5,7 +5,7 @@ import android.os.Bundle;
 
 import com.leo.qrcodeapp.R;
 
-public class EventListActivity extends AppCompatActivity {
+public class MainAppActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
