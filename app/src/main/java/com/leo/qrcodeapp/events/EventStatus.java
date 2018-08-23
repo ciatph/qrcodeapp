@@ -88,6 +88,10 @@ public enum EventStatus {
 
     public int TITLE = R.string.top_title_list_events;
 
+    // event types: data group thats currently being processed
+    public final int DATA_EVENT = 1;
+    public final int DATA_GUEST = 2;
+
     public void setAction(int action){
         ACTION = action;
     }
