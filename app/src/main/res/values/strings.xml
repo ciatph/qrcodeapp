@@ -19,6 +19,7 @@
     <string name="top_title_edit">Edit</string>
     <string name="top_title_delete">Delete</string>
     <string name="top_title_list">List</string>
+    <string name="top_title_list_events">Events List</string>
     <string name="top_title_search">Search</string>
     <string name="top_title_about">About</string>
 
@@ -83,4 +84,11 @@
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- tabs -->
+    <string-array name="tab_pages">
+        <item>Events</item>
+        <item>Manage Data</item>
+        <item>About</item>
+    </string-array>
 </resources>

@@ -12,7 +12,9 @@ import android.view.MenuItem;
 
 import com.leo.qrcodeapp.R;
 import com.leo.qrcodeapp.db.DatabaseHelper;
+import com.leo.qrcodeapp.events.EventStatus;
 import com.leo.qrcodeapp.models.Account;
+import com.leo.qrcodeapp.models.Event;
 import com.leo.qrcodeapp.utils.ActionMenuHelper;
 import com.leo.qrcodeapp.utils.AppUtilities;
 import com.leo.qrcodeapp.utils.CommonFlags;
@@ -45,18 +47,21 @@ public class MainQRActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        // setContentView(R.layout.fragment_pager_container);
         setContentView(R.layout.activity_event_list);
 
         // Set the app visibility status
         CommonFlags.INSTANCE.setAppVisibility(CommonFlags.INSTANCE.APP_ACTIVE);
 
         // toolbar and actionbar
-        // set toolbar title; set icon to open the navigation drawer
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
         actionBar = getSupportActionBar();
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setHomeButtonEnabled(false);
-        switchToMainScreen();
+
+        switchFragments(new PagerContainer(), CommonFlags.INSTANCE.TTTLE_LIST,
+                EventStatus.INSTANCE.SCR_LIST, false, null);
+        // switchToMainScreen();
     }
 
 
@@ -95,7 +100,7 @@ public class MainQRActivity extends AppCompatActivity {
      * @return
      */
     public boolean onOptionsItemSelected(MenuItem item){
-        if(CommonFlags.INSTANCE.APP_STATUS == CommonFlags.INSTANCE.APP_LOCKED){
+        if(EventStatus.INSTANCE.isApp(EventStatus.INSTANCE.APP_LOCKED)){
             MsgNotification.INSTANCE.displayMessage(
                     MsgNotification.INSTANCE.getMessage(MsgNotification.INSTANCE.MSG_APP_LOCKED));
             return false;
@@ -106,10 +111,24 @@ public class MainQRActivity extends AppCompatActivity {
                 return true;
             }
 
-            case R.id.action_app_add:
-            case R.id.action_app_edit:
-            case R.id.action_app_delete:
-            case R.id.action_app_save:
+            case R.id.action_app_add: {
+                //EventStatus.INSTANCE.setAction(EventStatus.INSTANCE.ACTION_ADD);
+                //switchFragments(new FarmerInfoFragment(), CommonFlags.INSTANCE.TTTLE_ADD, CommonFlags.INSTANCE.ACTIVE_SCREEN, CommonFlags.INSTANCE.FRAG_ADD, true, null);
+                return true;
+            } 
+
+            case R.id.action_app_edit: {
+                //EventStatus.INSTANCE.setAction(EventStatus.INSTANCE.ACTION_EDIT);
+                return true;
+            }
+            case R.id.action_app_delete: {
+                //EventStatus.INSTANCE.setAction(EventStatus.INSTANCE.ACTION_DELETE);
+                return true;
+            }
+            case R.id.action_app_save: {
+                //EventStatus.INSTANCE.setAction(EventStatus.INSTANCE.ACTION_SAVE);
+                return true;
+            }
             default:
                 return true;
         }
@@ -222,7 +241,7 @@ public class MainQRActivity extends AppCompatActivity {
             case R.string.top_title_registration:
             case R.string.top_title_delete:
                 break;
-            case R.string.top_title_list:
+            case R.string.top_title_list_events:
                 initializeActionBarIcons(ActionMenuHelper.INSTANCE.SCREEN_FARMERLIST_DISABLED_ICONS,
                         ActionMenuHelper.INSTANCE.SCREEN_FARMERLIST_ENABLED_ICONS, newTitleID);
                 break;

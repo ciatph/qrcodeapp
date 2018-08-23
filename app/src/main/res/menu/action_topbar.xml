@@ -2,6 +2,7 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <!--
     <item android:id="@+id/action_app_search"
         android:title="@string/menu_search"
         android:icon="@drawable/baseline_search_24"
@@ -15,9 +16,7 @@
     <item android:id="@+id/action_app_filter"
         android:title="@string/menu_filter"
         android:icon="@drawable/baseline_import_export_24"
-        app:showAsAction="always">
-
-    </item>
+        app:showAsAction="always" /> -->
 
     <item android:id="@+id/action_app_add"
         android:title="@string/menu_add"

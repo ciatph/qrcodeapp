@@ -34,7 +34,7 @@ public class InputViewAdapter extends ArrayAdapter {
 
     InputViewAdapter.InputViewAdapterListener cnCallback;
     String TAG = "--InputViewAdapter::";
-    int PROCESS_MODE = CommonFlags.INSTANCE.ACTION_ADD_FARMER;
+    int PROCESS_MODE = CommonFlags.INSTANCE.ACTION_ADD_EVENT;
     InputMethodManager imm;
     private Boolean enabled = true;
 

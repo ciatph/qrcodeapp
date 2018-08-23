@@ -488,7 +488,7 @@ public class InputRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
          * depending on the number of data to display
          */
         public void displayGroupData(Boolean enabled){
-            // InputViewAdapter only accepts ACTION_ADD_FARMER, ACTION_EDIT or ACTION_VIEW types
+            // InputViewAdapter only accepts ACTION_ADD_EVENT, ACTION_EDIT or ACTION_VIEW types
             // display a fresh group of blank data
             //Log.d(TAG, "getting KeyPair at adapt position " + getAdapterPosition() + "");
             if(content.get(getAdapterPosition()).getGroupDataValue() == null){

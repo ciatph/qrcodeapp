@@ -10,7 +10,9 @@ import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
 
+import com.leo.qrcodeapp.R;
 import com.leo.qrcodeapp.db.DatabaseHelper;
+import com.leo.qrcodeapp.events.EventStatus;
 import com.leo.qrcodeapp.utils.AppUtilities;
 import com.leo.qrcodeapp.utils.CommonFlags;
 
@@ -38,15 +40,6 @@ public class EventListFragment extends ListFragment {
     @Override
     public void onCreate(Bundle savedInstanceState){
         super.onCreate(savedInstanceState);
-        // get filter argumments
-        Bundle args = getArguments();
-
-        if(args != null){
-            PROCESS_MODE = args.getInt(CommonFlags.INSTANCE.INTENT_PROCESS_MODE);
-            TITLE = args.getInt(CommonFlags.INSTANCE.INTENT_TOOLBAR_TITLE, -1);
-            CommonFlags.INSTANCE.ACTIVE_SCREEN = args.getInt(CommonFlags.INSTANCE.INTENT_ACTIVE_SCREEN);
-            Log.d(TAG, AppUtilities.INSTANCE.numberToString(PROCESS_MODE) + ", title: " + TITLE) ;
-        }
     }
 
 
@@ -88,11 +81,14 @@ public class EventListFragment extends ListFragment {
     @Override
     public void onResume(){
         // Set active screen
-        CommonFlags.INSTANCE.ACTIVE_SCREEN = CommonFlags.INSTANCE.SCREEN_LIST_EVENTS;
+        EventStatus.INSTANCE.setScreenView(
+                EventStatus.INSTANCE.SCR_LIST_EVENTS,
+                EventStatus.INSTANCE.ACTION_LIST,
+                R.string.top_title_list_events);
 
         super.onResume();
         // Set title bar and topbar icons
-        ((MainQRActivity) getActivity()).setActionBarTitleFragment(TITLE);
+        ((MainQRActivity) getActivity()).setActionBarTitleFragment(R.string.top_title_list_events);
     }
 
 
