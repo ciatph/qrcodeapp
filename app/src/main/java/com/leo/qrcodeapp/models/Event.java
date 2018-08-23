@@ -1,6 +1,11 @@
 package com.leo.qrcodeapp.models;
 
-public class Event {
+import com.leo.qrcodeapp.R;
+import com.leo.qrcodeapp.db.DatabaseHelper;
+import com.leo.qrcodeapp.db.TableObjectsHelper;
+import com.leo.qrcodeapp.utils.ApplicationContextProvider;
+
+public class Event extends TableObjectsHelper{
     // table name
     public static final String tablename = "events";
 
@@ -21,4 +26,20 @@ public class Event {
 
     // date event details were modified
     public static final String date_modified = "date_modified";
+
+    public Event(){
+        initMapContents(
+                DatabaseHelper.getClassFieldNames(Event.class)
+        );
+    }
+
+    public Event(String[] labelsValues){
+        initMapContents(
+                DatabaseHelper.getClassFieldNames(Event.class)
+        );
+
+        initLabels(
+                new String[]{ name, venue, date_event }, labelsValues
+        );
+    }
 }

@@ -91,4 +91,12 @@
         <item>Manage Data</item>
         <item>About</item>
     </string-array>
+
+    <!-- models: event -->
+    <string-array name="model_event">
+        <item>Event Name</item>
+        <item>Venue</item>
+        <item>Date</item>
+    </string-array>
+
 </resources>

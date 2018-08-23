@@ -1,6 +1,8 @@
 package com.leo.qrcodeapp.db;
 
 
+import android.util.Log;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 
@@ -30,6 +32,11 @@ public class TableObjectsHelper {
 
     // ordering of column fields, as they were initialized in initMapContents
     private HashMap<Integer, String> mappingOrder = new HashMap<>();
+
+    // input labels mapping from strings.xml
+    private HashMap<String, String> labels = new HashMap<>();
+
+    private String[] label_list;
 
     // table name
     private String tableName = "";
@@ -63,6 +70,14 @@ public class TableObjectsHelper {
         }
     }
 
+    public void initLabels(String[] fields, String[] values){
+        label_list = fields;
+        for(int i=0; i<fields.length; i++){
+            labels.put(fields[i], values[i]);
+            Log.d("--adding", fields[i] + " == " + values[i]);
+        }
+    }
+
     private String integerToString(int num){
         StringBuilder sb = new StringBuilder();
         sb.append(num);
@@ -88,6 +103,16 @@ public class TableObjectsHelper {
 
     public void setTableName(String tableName){
         this.tableName = tableName;
+    }
+
+    public void setLabels(String[] fields, String[] values){
+        for(int i=0; i<fields.length; i++){
+            labels.put(fields[i], values[i]);
+        }
+    }
+
+    public void setLabel(String field, String value){
+        labels.put(field, value);
     }
 
     public String getKey(String searchKey){
@@ -212,6 +237,31 @@ public class TableObjectsHelper {
 
     public String getId(){
         return id;
+    }
+
+    public HashMap<String, String> getLabels(){
+        return labels;
+    }
+
+    public String[] getLabelList(){
+        return label_list;
+    }
+
+    public String[] getLabelContent(boolean isValue){
+        if(!isValue){
+            return label_list;
+        }
+        else{
+            ArrayList<String> list = new ArrayList<>();
+            for(int i=0; i<label_list.length; i++){
+                list.add(labels.get(label_list[i]));
+            }
+            return list.toArray(new String[0]);
+        }
+    }
+
+    public String getLabel(String field){
+        return labels.get(field);
     }
 
     public void removeColumn(String key){

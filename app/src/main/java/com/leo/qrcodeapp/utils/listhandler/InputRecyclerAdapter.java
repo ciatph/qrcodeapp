@@ -23,6 +23,7 @@ import android.widget.TextView;
 import java.util.HashMap;
 
 import com.leo.qrcodeapp.R;
+import com.leo.qrcodeapp.events.EventStatus;
 import com.leo.qrcodeapp.utils.AppUtilities;
 import com.leo.qrcodeapp.utils.ApplicationContextProvider;
 import com.leo.qrcodeapp.utils.CommonFlags;
@@ -498,7 +499,7 @@ public class InputRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
                         R.id.view_edit_hint_content,
                         content.get(getAdapterPosition()).getGroupData(),
                         new String[content.get(getAdapterPosition()).getGroupData().length],
-                        CommonFlags.INSTANCE.PROCESS_MODE, //VIEW_TYPE
+                        EventStatus.INSTANCE.getAction(), //VIEW_TYPE
                         this, enabled);
             }
             else{
@@ -509,7 +510,7 @@ public class InputRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
                         R.id.view_edit_hint_content,
                         content.get(getAdapterPosition()).getGroupData(),
                         content.get(getAdapterPosition()).getGroupDataValue(),
-                        CommonFlags.INSTANCE.PROCESS_MODE, //VIEW_TYPE
+                        EventStatus.INSTANCE.getAction(), //VIEW_TYPE
                         this, enabled);
                         */
                 if(inputViewAdapter == null){
@@ -518,7 +519,7 @@ public class InputRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
                             R.id.view_edit_hint_content,
                             content.get(getAdapterPosition()).getGroupData(),
                             content.get(getAdapterPosition()).getGroupDataValue(),
-                            CommonFlags.INSTANCE.PROCESS_MODE, //VIEW_TYPE
+                            EventStatus.INSTANCE.getAction(), //VIEW_TYPE
                             this, enabled);
                     //Log.d(TAG, "--creating new inner adapter");
                 }
@@ -558,7 +559,7 @@ public class InputRecyclerAdapter extends RecyclerView.Adapter<RecyclerView.View
     public InputRecyclerAdapter(HashMap<Integer, KeyValuePair> data, int batchViewType){
         content = data;
         //VIEW_TYPE = batchViewType;
-        VIEW_TYPE = (batchViewType == CommonFlags.INSTANCE.ACTION_VIEW) ? TYPE_LABEL : batchViewType;
+        VIEW_TYPE = (batchViewType == EventStatus.INSTANCE.ACTION_VIEW) ? TYPE_LABEL : batchViewType;
         initTextColorDisabled(null, null);
 
         // update countNewGrouped counter for EDIT_TYPE_INPUT_GROUP items in data

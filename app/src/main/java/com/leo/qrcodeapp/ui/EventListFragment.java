@@ -24,7 +24,7 @@ import java.util.HashMap;
  */
 public class EventListFragment extends ListFragment {
 
-    int PROCESS_MODE = CommonFlags.INSTANCE.ACTION_LIST;
+    int PROCESS_MODE = EventStatus.INSTANCE.ACTION_LIST;
     DatabaseHelper dbConnector;
     private String TAG = "--list";
     private int TITLE = -1;
@@ -69,7 +69,7 @@ public class EventListFragment extends ListFragment {
         dbConnector = DatabaseHelper.getsInstance(getContext());
         if(mapTree != null && mapTree.size() == 0){
             Log.d(TAG, "--listing data!");
-            listData(CommonFlags.INSTANCE.CURRENT_YEAR);
+            //listData(CommonFlags.INSTANCE.CURRENT_YEAR);
         }
     }
 

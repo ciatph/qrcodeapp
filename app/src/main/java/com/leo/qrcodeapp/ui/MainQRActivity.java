@@ -13,8 +13,6 @@ import android.view.MenuItem;
 import com.leo.qrcodeapp.R;
 import com.leo.qrcodeapp.db.DatabaseHelper;
 import com.leo.qrcodeapp.events.EventStatus;
-import com.leo.qrcodeapp.models.Account;
-import com.leo.qrcodeapp.models.Event;
 import com.leo.qrcodeapp.utils.ActionMenuHelper;
 import com.leo.qrcodeapp.utils.AppUtilities;
 import com.leo.qrcodeapp.utils.CommonFlags;
@@ -51,7 +49,7 @@ public class MainQRActivity extends AppCompatActivity {
         setContentView(R.layout.activity_event_list);
 
         // Set the app visibility status
-        CommonFlags.INSTANCE.setAppVisibility(CommonFlags.INSTANCE.APP_ACTIVE);
+        // CommonFlags.INSTANCE.setAppVisibility(CommonFlags.INSTANCE.APP_ACTIVE);
 
         // toolbar and actionbar
         setSupportActionBar((Toolbar) findViewById(R.id.toolbar));
@@ -59,8 +57,8 @@ public class MainQRActivity extends AppCompatActivity {
         actionBar.setDisplayHomeAsUpEnabled(false);
         actionBar.setHomeButtonEnabled(false);
 
-        switchFragments(new PagerContainer(), CommonFlags.INSTANCE.TTTLE_LIST,
-                EventStatus.INSTANCE.SCR_LIST, false, null);
+        switchFragments(new PagerContainer(), R.string.top_title_list_events,
+                EventStatus.INSTANCE.SCR_LIST,null);
         // switchToMainScreen();
     }
 
@@ -112,8 +110,8 @@ public class MainQRActivity extends AppCompatActivity {
             }
 
             case R.id.action_app_add: {
-                //EventStatus.INSTANCE.setAction(EventStatus.INSTANCE.ACTION_ADD);
-                //switchFragments(new FarmerInfoFragment(), CommonFlags.INSTANCE.TTTLE_ADD, CommonFlags.INSTANCE.ACTIVE_SCREEN, CommonFlags.INSTANCE.FRAG_ADD, true, null);
+                EventStatus.INSTANCE.setAction(EventStatus.INSTANCE.ACTION_ADD);
+                switchFragments(new AddEventFragment(), R.string.top_title_add, EventStatus.INSTANCE.SCR_VIEW,null);
                 return true;
             } 
 
@@ -129,6 +127,11 @@ public class MainQRActivity extends AppCompatActivity {
                 //EventStatus.INSTANCE.setAction(EventStatus.INSTANCE.ACTION_SAVE);
                 return true;
             }
+
+            case R.id.action_app_cancel: {
+                switchToMainScreen();
+                return true;
+            }
             default:
                 return true;
         }
@@ -139,12 +142,12 @@ public class MainQRActivity extends AppCompatActivity {
      * Convenience function for switching to main (Listing) screen
      */
     public void switchToMainScreen(){
-        CommonFlags.INSTANCE.setCurrentScreen(CommonFlags.INSTANCE.SCREEN_LIST_EVENTS);
-        CommonFlags.INSTANCE.APP_STATUS = CommonFlags.INSTANCE.APP_FREE;
+        EventStatus.INSTANCE.setScreen(EventStatus.INSTANCE.SCR_LIST_EVENTS);
+        EventStatus.INSTANCE.setAppStatuss(EventStatus.INSTANCE.APP_FREE);
 
         // switch to the survey data listing UI view by default
-        switchFragments(new EventListFragment(), CommonFlags.INSTANCE.TTTLE_LIST,
-                CommonFlags.INSTANCE.SCREEN_LIST_EVENTS, false, null);
+        switchFragments(new PagerContainer(), R.string.top_title_list_events,
+                EventStatus.INSTANCE.SCR_LIST_EVENTS, null);
     }
 
 
@@ -154,21 +157,21 @@ public class MainQRActivity extends AppCompatActivity {
      * @param fragment      UI Fragment to display
      * @param menuTitle     Resource ID of the String title to set in the UI fragment
      * @param screenId      global SCREEN Id
-     * @param addToStack    flag to add the fragment in the stack for back button press
      * @author mbarua on 10/27/2017.
      */
-    public void switchFragments(Fragment fragment, int menuTitle, int screenId, boolean addToStack, String ID){
+    public void switchFragments(Fragment fragment, int menuTitle, int screenId, String ID){
         CommonFlags.INSTANCE.PAGE_UI_LOADED = false;
 
         Log.d(TAG, "switching to frag " + AppUtilities.INSTANCE.numberToString(screenId));
         // set the current active screen
-        CommonFlags.INSTANCE.setCurrentScreen(screenId);
+        EventStatus.INSTANCE.setScreen(screenId);
 
         // always include the "new" page status settings to pass the fragment by default
+        /*
         Bundle bundle = new Bundle();
 
         // initialize the fragment's process mode (add, view, edit)
-        bundle.putInt(CommonFlags.INSTANCE.INTENT_PROCESS_MODE, CommonFlags.INSTANCE.PROCESS_MODE);
+        bundle.putInt(CommonFlags.INSTANCE.INTENT_PROCESS_MODE, EventStatus.INSTANCE.getAction());
 
         // initialize the fragment's topbar title
         bundle.putInt(CommonFlags.INSTANCE.INTENT_TOOLBAR_TITLE, menuTitle);
@@ -184,12 +187,12 @@ public class MainQRActivity extends AppCompatActivity {
             bundle.putString(CommonFlags.INSTANCE.INTENT_DATA_ID, ID);
 
         fragment.setArguments(bundle);
-
-        if(CommonFlags.INSTANCE.getAppViisibility() == CommonFlags.INSTANCE.APP_ACTIVE) {
+        */
+        //if(CommonFlags.INSTANCE.getAppViisibility() == CommonFlags.INSTANCE.APP_ACTIVE) {
             FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
             transaction.replace(R.id.fragment_container, fragment);
             transaction.commit();
-        }
+        //}
     }
 
 
@@ -211,7 +214,6 @@ public class MainQRActivity extends AppCompatActivity {
      */
     public void initializeActionBarIcons(int[] disabled, int[] enabled, int resId){
         getSupportActionBar().setTitle(resId);
-        Log.d(TAG, "Setting topbar title " + getResources().getString(resId) + "!, process: " + CommonFlags.INSTANCE.PROCESS_MODE + "");
 
         actionMenuIconsEnabled.clear();
         actionMenuIconsDisabled.clear();

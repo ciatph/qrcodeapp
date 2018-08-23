@@ -51,4 +51,11 @@ public enum CommonFlags {
     public final int APP_IDLE = 34;
     public final int APP_TERMINATED = 35;
     public int APP_VISIBILITY = APP_TERMINATED;
+
+    /**
+     * Date conversion output
+     */
+    public final int DATE_SIMPLE = 1;
+    public final int DATE_UNIX = 2;
+    public final int DATE_READABLE = 3;
 }

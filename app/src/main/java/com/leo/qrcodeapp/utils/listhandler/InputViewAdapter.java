@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 
 import com.leo.qrcodeapp.R;
+import com.leo.qrcodeapp.events.EventStatus;
 import com.leo.qrcodeapp.utils.AppUtilities;
 import com.leo.qrcodeapp.utils.ApplicationContextProvider;
 import com.leo.qrcodeapp.utils.CommonFlags;
@@ -34,7 +35,7 @@ public class InputViewAdapter extends ArrayAdapter {
 
     InputViewAdapter.InputViewAdapterListener cnCallback;
     String TAG = "--InputViewAdapter::";
-    int PROCESS_MODE = CommonFlags.INSTANCE.ACTION_ADD_EVENT;
+    int PROCESS_MODE = EventStatus.INSTANCE.ACTION_ADD;
     InputMethodManager imm;
     private Boolean enabled = true;
 
@@ -153,11 +154,11 @@ public class InputViewAdapter extends ArrayAdapter {
             holder = (InputViewAdapter.ViewHolder) convertView.getTag();
         }
 
-        if(PROCESS_MODE == CommonFlags.INSTANCE.ACTION_ADD_PLOT){
+        if(PROCESS_MODE == EventStatus.INSTANCE.ACTION_ADD){
             holder.viewUi.setHint("Enter " + mDataArray.get(position));
             holder.viewUi.setText(hashMap.get(mDataArray.get(position)));
         }
-        else if(PROCESS_MODE == CommonFlags.INSTANCE.ACTION_VIEW || PROCESS_MODE ==  CommonFlags.INSTANCE.ACTION_EDIT){
+        else if(PROCESS_MODE == EventStatus.INSTANCE.ACTION_VIEW || PROCESS_MODE ==  EventStatus.INSTANCE.ACTION_EDIT){
             //holder.viewUi.setText(mDataArray.get(position));
             holder.viewUi.setHint("Enter " + mDataArray.get(position));
             holder.viewUi.setText(hashMap.get(mDataArray.get(position)));
