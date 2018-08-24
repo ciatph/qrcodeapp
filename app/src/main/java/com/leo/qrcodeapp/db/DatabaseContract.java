@@ -1,6 +1,7 @@
 package com.leo.qrcodeapp.db;
 
 import com.leo.qrcodeapp.models.Account;
+import com.leo.qrcodeapp.models.Event;
 
 
 /**
@@ -20,5 +21,5 @@ public class DatabaseContract {
 
     // ---------------- SQL CREATE TABLE query constants for FARMER METADATA TABLES ----------------
     public static final String SQL_CREATE_ACCOUNT = DatabaseHelper.initLocalSchemaIndexed(Account.tablename, Account.class);
-
+    public static final String SQL_CREATE_EVENT = DatabaseHelper.initLocalSchemaIndexed(Event.tablename, Event.class);
 }

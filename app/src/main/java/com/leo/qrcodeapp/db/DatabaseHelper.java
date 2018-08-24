@@ -47,6 +47,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         Log.d(LOG, DatabaseContract.SQL_CREATE_ACCOUNT);
         db.execSQL(DatabaseContract.SQL_CREATE_ACCOUNT);
+        db.execSQL(DatabaseContract.SQL_CREATE_EVENT);
     }
 
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {

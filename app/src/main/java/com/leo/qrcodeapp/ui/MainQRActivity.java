@@ -12,11 +12,17 @@ import android.view.MenuItem;
 
 import com.leo.qrcodeapp.R;
 import com.leo.qrcodeapp.db.DatabaseHelper;
+import com.leo.qrcodeapp.events.ActionEvent;
 import com.leo.qrcodeapp.events.EventStatus;
+import com.leo.qrcodeapp.models.Event;
 import com.leo.qrcodeapp.utils.ActionMenuHelper;
 import com.leo.qrcodeapp.utils.AppUtilities;
 import com.leo.qrcodeapp.utils.CommonFlags;
 import com.leo.qrcodeapp.utils.MsgNotification;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.ArrayList;
 
@@ -60,6 +66,19 @@ public class MainQRActivity extends AppCompatActivity {
         switchFragments(new PagerContainer(), R.string.top_title_list_events,
                 EventStatus.INSTANCE.SCR_LIST,null);
         // switchToMainScreen();
+    }
+
+
+    public void onStart(){
+        super.onStart();
+        EventBus.getDefault().register(this);
+        dbConnector = DatabaseHelper.getsInstance(this);
+    }
+
+    @Override
+    public void onStop(){
+        super.onStop();
+        EventBus.getDefault().unregister(this);
     }
 
 
@@ -110,7 +129,11 @@ public class MainQRActivity extends AppCompatActivity {
             }
 
             case R.id.action_app_add: {
-                EventStatus.INSTANCE.setAction(EventStatus.INSTANCE.ACTION_ADD);
+                // Set active screen
+                EventStatus.INSTANCE.setScreenView(
+                        EventStatus.INSTANCE.SCR_VIEW,
+                        EventStatus.INSTANCE.ACTION_ADD,
+                        R.string.top_title_add);
                 switchFragments(new AddEventFragment(), R.string.top_title_add, EventStatus.INSTANCE.SCR_VIEW,null);
                 return true;
             } 
@@ -125,6 +148,12 @@ public class MainQRActivity extends AppCompatActivity {
             }
             case R.id.action_app_save: {
                 //EventStatus.INSTANCE.setAction(EventStatus.INSTANCE.ACTION_SAVE);
+                if(EventStatus.INSTANCE.isScreen(EventStatus.INSTANCE.SCR_VIEW)){
+                    EventBus.getDefault().post(new ActionEvent(EventStatus.INSTANCE.ACTION_ADD, EventStatus.INSTANCE.DATA_GUEST));
+                }
+                else{
+
+                }
                 return true;
             }
 
@@ -135,6 +164,12 @@ public class MainQRActivity extends AppCompatActivity {
             default:
                 return true;
         }
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(ActionEvent flagEvent){
+
     }
 
 
@@ -271,5 +306,24 @@ public class MainQRActivity extends AppCompatActivity {
         }
 
         // TODO: 10/27/2017 set the topbar menu icons
+    }
+
+
+    /**
+     * Save encoded data to local database
+     * @param event
+     */
+    public void saveData(Event event){
+        long sInfo = dbConnector.insertDB(Event.tablename,
+                event.getColumnFields(), event.getValuesFields());
+        Log.d(TAG, "data saved!");
+
+        String[] fields = event.getColumnFields();
+        String[] values = event.getValuesFields();
+        for(int i=0; i<fields.length; i++){
+            Log.d(TAG, "test: " + fields[i] + " = " + values[i]);
+        }
+
+        switchToMainScreen();
     }
 }

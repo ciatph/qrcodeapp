@@ -7,9 +7,6 @@ public class UserProfile {
     // user id (QR CODE ID)
     public static final String USER_ID = "user_id";
 
-    // event id to which attendee was encoded
-    public static final String EVENT_ID = "event_id";
-
     public static final String COL_LNAME = "lname";
 
     public static final String COL_FNAME = "fname";

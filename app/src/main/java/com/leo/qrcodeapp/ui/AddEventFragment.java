@@ -9,11 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 
 import com.leo.qrcodeapp.R;
+import com.leo.qrcodeapp.events.ActionEvent;
 import com.leo.qrcodeapp.events.EventStatus;
 import com.leo.qrcodeapp.models.Event;
+import com.leo.qrcodeapp.utils.AppUtilities;
+import com.leo.qrcodeapp.utils.CommonFlags;
 import com.leo.qrcodeapp.utils.listhandler.InputRecyclerAdapter;
 import com.leo.qrcodeapp.utils.listhandler.KeyValuePair;
 import com.leo.qrcodeapp.utils.listhandler.RecyclerListManager;
+
+import org.greenrobot.eventbus.EventBus;
+import org.greenrobot.eventbus.Subscribe;
+import org.greenrobot.eventbus.ThreadMode;
 
 import java.util.HashMap;
 
@@ -45,6 +52,7 @@ public class AddEventFragment extends Fragment {
     @Override
     public void onStart(){
         super.onStart();
+        EventBus.getDefault().register(this);
 
         if(mData.mAdapter == null){
             int adapterViewType = (EventStatus.INSTANCE.isAction(EventStatus.INSTANCE.ACTION_EDIT)) ?
@@ -65,6 +73,26 @@ public class AddEventFragment extends Fragment {
     }
 
 
+    @Override
+    public void onStop(){
+        super.onStop();
+        EventBus.getDefault().unregister(this);
+    }
+
+
+    @Subscribe(threadMode = ThreadMode.MAIN)
+    public void onMessageEvent(ActionEvent event){
+        if(event.getEvent() == EventStatus.INSTANCE.ACTION_ADD && event.getType() == EventStatus.INSTANCE.DATA_GUEST){
+            getData();
+        }
+    }
+
+
+    /**
+     * Render the UI. Bind input to fields
+     * @param processMode
+     * @return
+     */
     public HashMap<Integer, KeyValuePair> getViewData(int processMode){
         HashMap<Integer, KeyValuePair> map = new HashMap<>();
 
@@ -79,5 +107,25 @@ public class AddEventFragment extends Fragment {
         }
 
         return map;
+    }
+
+
+    public void getData(){
+        String[] fields = mData.getColumnFields();
+        String[] values = mData.getFieldValues();
+
+        Event event = new Event();
+
+        for(int i=0; i<fields.length; i++)
+            if(values[i] != "" && values[i] != null)
+                event.set(fields[i], values[i]);
+
+        event.set(Event.acct_id, CommonFlags.INSTANCE.CURRENT_USER.getId());
+        event.set(Event.date_created, AppUtilities.INSTANCE.getCurrentDate(CommonFlags.INSTANCE.DATE_SIMPLE));
+        event.set(Event.date_modified, AppUtilities.INSTANCE.getCurrentDate(CommonFlags.INSTANCE.DATE_SIMPLE));
+
+        // Save event
+        if(EventStatus.INSTANCE.isAction(EventStatus.INSTANCE.ACTION_ADD))
+            ((MainQRActivity) getContext()).saveData(event);
     }
 }
