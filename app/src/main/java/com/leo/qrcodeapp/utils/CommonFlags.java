@@ -31,7 +31,8 @@ public enum CommonFlags {
     public final String LIST_HEADER = "header";             // event name
     public final String LIST_SUBTOPIC_01 = "subtopic_01";   // event date
     public final String LIST_SUBTOPIC_02 = "subtopic_02";   // user/encoder
-    public final String LIST_ID = "_did";
+    public final String LIST_SUBTOPIC_03 = "subtopic_03";   // user/encoder
+    public final String LIST_ID = "_id";
     public final String LIST_ISSYNCED = "_isSynced";
     public final String LIST_YEAR = "_year";
 

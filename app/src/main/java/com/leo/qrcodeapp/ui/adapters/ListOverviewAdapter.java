@@ -1,4 +1,4 @@
-package com.leo.qrcodeapp.ui;
+package com.leo.qrcodeapp.ui.adapters;
 
 
 import android.content.Context;
@@ -43,7 +43,7 @@ public class ListOverviewAdapter extends ArrayAdapter{
      * View holder class for visual UI management
      */
     public static class ViewHolder{
-        TextView txtEventName, txtEventDate, txtUser;
+        TextView txtEventName, txtEventDate, txtUser, txtCreated;
 
         // Icon to indicate if data has been saved to firebase
         ImageView icon_locked;
@@ -53,12 +53,15 @@ public class ListOverviewAdapter extends ArrayAdapter{
             txtEventName = view.findViewById(R.id.title_header);
             txtUser = view.findViewById(R.id.label_content_01);
             txtEventDate = view.findViewById(R.id.label_content_02);
+            txtCreated = view.findViewById(R.id.label_content_03);
+            icon_locked = view.findViewById(R.id.label_icon);
         }
 
-        public void setTextValues(String eventName, String userName, String eventDate){
+        public void setTextValues(String eventName, String userName, String eventDate, String dateCreated){
             txtEventName.setText(eventName);
             txtUser.setText(userName);
             txtEventDate.setText(eventDate);
+            txtCreated.setText(dateCreated);
 
             // Set locked label icon based on label_content_01
             icon_locked.setImageResource(R.drawable.ic_check_black_24dp);
@@ -101,7 +104,8 @@ public class ListOverviewAdapter extends ArrayAdapter{
             holder.setTextValues(
                     mData.get(position).get(CommonFlags.INSTANCE.LIST_HEADER),
                     mData.get(position).get(CommonFlags.INSTANCE.LIST_SUBTOPIC_01),
-                    mData.get(position).get(CommonFlags.INSTANCE.LIST_SUBTOPIC_02));
+                    mData.get(position).get(CommonFlags.INSTANCE.LIST_SUBTOPIC_02),
+                    mData.get(position).get(CommonFlags.INSTANCE.LIST_SUBTOPIC_03));
         }
         else{
             Log.d(TAG, "MData size is 0");

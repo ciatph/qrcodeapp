@@ -53,27 +53,30 @@ public class PagerContainer extends Fragment {
 
         // update tabs
         tabLayout = getActivity().findViewById(R.id.tab_layout);
-        tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
-        String[] tabArray = getResources().getStringArray(R.array.tab_pages);
-        for(int i=0; i<tabArray.length; i++){
-            tabLayout.addTab(tabLayout.newTab().setText(tabArray[i]));
+        if(tabLayout.getTabCount() == 0) {
+            String[] tabArray = getResources().getStringArray(R.array.tab_pages);
+            for (int i = 0; i < tabArray.length; i++) {
+                tabLayout.addTab(tabLayout.newTab().setText(tabArray[i]));
+            }
+
+            tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
+            tabLayoutOnPageChangeListener = new TabLayout.OnTabSelectedListener() {
+                @Override
+                public void onTabSelected(TabLayout.Tab tab) {
+                    viewPager.setCurrentItem(tab.getPosition());
+                }
+
+                @Override
+                public void onTabUnselected(TabLayout.Tab tab) {
+                }
+
+                @Override
+                public void onTabReselected(TabLayout.Tab tab) {
+                }
+            };
+            tabLayout.addOnTabSelectedListener(tabLayoutOnPageChangeListener);
         }
-
-        tabLayoutOnPageChangeListener = new TabLayout.OnTabSelectedListener() {
-            @Override
-            public void onTabSelected(TabLayout.Tab tab) {
-                viewPager.setCurrentItem(tab.getPosition());
-            }
-
-            @Override
-            public void onTabUnselected(TabLayout.Tab tab) {
-            }
-
-            @Override
-            public void onTabReselected(TabLayout.Tab tab) {
-            }
-        };
 
         // update viewpager
         // initialize the view pager, subpages for the tabs
@@ -105,7 +108,6 @@ public class PagerContainer extends Fragment {
         viewPager.setAdapter(pageAdapter);
 
         // add listeners
-        tabLayout.addOnTabSelectedListener(tabLayoutOnPageChangeListener);
         viewPager.addOnPageChangeListener(pageChangeListener);
     }
 
