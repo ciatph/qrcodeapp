@@ -1,4 +1,5 @@
 # qrcodeapp
+
 An attendance list checker using QR code scanner for tagging names using Google Play Services and Google's Mobile Vision API's.
 
 Done using nisrulz's compiled [qreader](https://github.com/nisrulz/qreader) API.
